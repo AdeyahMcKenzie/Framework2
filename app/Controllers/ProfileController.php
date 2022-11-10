@@ -1,13 +1,13 @@
 <?php 
 
-class CoursesController extends AbstractController {
+class ProfileController extends AbstractController {
 
 
-    //protected $model;
+    
     
     protected function makeModel(): Model{
         //make a new model
-        $this->model = new IndexModel(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
+        $this->model = new ProfileModel(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
          
         return $this->model;
     }
@@ -15,7 +15,7 @@ class CoursesController extends AbstractController {
     
     protected function makeView(): View{
         $this->view = new View();
-        $this->view->registerTemplate(TEMPLATE_DIR . '/courses.tpl.php');
+        $this->view->registerTemplate(TEMPLATE_DIR . '/profile.tpl.php');
 
         return $this->view;
     }
@@ -23,9 +23,9 @@ class CoursesController extends AbstractController {
     
     public function start(){
 
+        //create validator object
         $auth = new Authenticate();
         if($auth->isUserLoggedIn() == true){
-        
             //make model
             $this->model = $this->makeModel();
 
@@ -34,24 +34,27 @@ class CoursesController extends AbstractController {
         
             //for now 
             $arr = array(1,2,3,4);
-            //get courses 
+
+            //get courses table 
             $courses = $this->model->findAll('courses',$arr);
 
-            //get instructors
-            $instructors = $this->model->findAll('instructors',$arr);
+            //get user courses table
+            $user_courses = $this->model->findAll('user_courses',$arr);
 
-            //get department
-            //
         
         
+            //print_r($courses);
+            echo "<br>";
+            //print_r($user_courses);
             //data to be displayed
             $this->view->importVar('courses',$courses);
-            $this->view->importVar('instructors',$instructors);
+            $this->view->importVar('user_courses',$user_courses);
 
             //display everything
             $this->view->display();
-        }else{
-            
+
+        }else {
+            //header("Location:index.php");
         }
 
     }

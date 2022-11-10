@@ -7,19 +7,29 @@ class ValidateClass{
      * @return bool 
      */
     public function areCredentialsValid( array $user_info): bool {
-        //validate name 
-        if(!isNameValid($user_info['name'])){
-            return false;
-        }
+        
+        $email = $user_info['email'];
+        $password = $user_info['password'];
+         
+        //create model object to search db
+        $model = new AuthenticateModel(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
+        
+        $result = $model->find('users', $user_info) ;
+        
+        $hashpass = $result['password'];
 
-        if(!isEmailValid($user_info['email'])){
-            return false;
-        }
+       
+        
+         //check that password matches email
+         if(password_verify($password,$hashpass)){
+                
+                return true;//user is valid and exists
+            }
+            
+         
 
-        if(isPasswordValid($user_info['pass1'],true,$user_info['pass2'])){
-            return false;
-        }
-        return true;
+        
+        return false;//credentials do not match
     }
 
     /** @param email - the email to be validated
@@ -44,11 +54,17 @@ class ValidateClass{
      */
     public function isPasswordValid(string $password, bool $retyped=false, string $retyped_pass = ''): bool{
 
+        
         //check if two passwords match 
         if ($password == $retyped_pass && $retyped == true){
             //check length of string
-            if (strlen($password)>8){
-                return true;//return true if string valid
+            if (strlen($password)>=8){
+               
+                //check for capital letter, common letter and number
+                if(preg_match('/[A-Z]/', $password) && preg_match('/[a-z]/', $password) && preg_match('/[0-9]/', $password) ){
+                    return true;//return true if string valid
+                }
+                
             }
         }
         return false;
@@ -61,17 +77,23 @@ class ValidateClass{
      */
     public function isNameValid(string $name): bool{
         //check that name is string 
-        if (!ctype_alpha($name)){
+       /* if (!ctype_alpha($name)){
             return false;
-        }
+        }*/
 
         //find the seperator between names
         $space = strrpos($name," ");
                 
         $fname = substr($name,0,(-$space));//single out first name
+
+        
         //confirm lastname exists
         if(!($lname = substr($name,($space+1)))){
             return false;//if no lastname present return false
+        }
+
+        if(!ctype_alpha($fname) && !ctype_alpha($lname)){
+            return false;
         }
 
         return true;

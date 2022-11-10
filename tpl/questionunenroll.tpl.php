@@ -13,26 +13,32 @@
 				<li><a href="index.php?controller=Streams">Streams</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
 				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=SignUp">Sign Up</a></li>
+				<li><a href="index.php?controller=Register">Sign Up</a></li>
 			</ul>
 		</nav>
 		<main>
 		<h1>Are You Sure You Want to Unenroll from this Course?</h1>
+
 		<ul class="course-list">
 			<li><div>
-				<a href="#"><img src="images/innovation.jpg" alt="course image"></a>
+				<?php 
+				echo"<a href='#'><img src=images/".$courseInfo['course_image']." alt='course image'></a>
+				</div>";
+				echo "<div>
+				<a href='#'><span class='faculty-department'>Faculty or Department</span>";	
+				echo"	<span class='course-title'>".$courseInfo['course_name']."</span>";
+				echo"<span class='instructor'>".$instructor['instructor_name']."</span></a>
 				</div>
-				<div>
-				<a href="#"><span class="faculty-department">Faculty or Department</span>	
-					<span class="course-title">Course Title</span>
-					<span class="instructor">Course Instructor</span></a>
-				</div>
-				<div>
-					<a href="#" class="startnow-btn startnow-button">Cancel</a>
-					<a href="#" class="startnow-btn unenroll-button">Okay</a>
+				<div>";
+			?>
+				<form action="unenrollhandler.php" method="POST">
+					<a href="profile.php" class="startnow-btn startnow-button">Cancel</a>
+					<a href='#' class='startnow-btn unenroll-button'><button style='border:none;background:none;'>Okay</button></a><input type='hidden' name='course' value="<?php echo $courseInfo['course_id'] ?> ">
+				</form>
+				
 				</div>
 			</li>
-
+			
 		</ul>
 			<footer>
 				<nav>

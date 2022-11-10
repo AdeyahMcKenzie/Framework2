@@ -13,25 +13,29 @@
 				<li><a href="index.php?controller=Streams">Streams</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
 				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=SignUp">Sign Up</a></li>
+				<li><a href="#">Sign Up</a></li>
 			</ul>
 		</nav>
 		<main>
 		   <div class="register-box">
 			<div class="register-box-body">
 			<p class="login-box-msg">Sign Up - Feed Your Curiosity</p>
-			<?php if (isset($passwordErr))
+			<?php if (isset($passErr))
 				  		{
-					  		echo  "<p class ='login-box-msg' style='color:red'>".$passwordErr."</p>";
+					  		echo  "<p class ='login-box-msg' style='color:red'>".$passErr."</p>";
 				  		}
 
 						  if (isset($registerErr))
 				  		{
 					  		echo  "<p class='login-box-msg' style='color:red'>".$registerErr."</p>";
 				  		}
-						  if (isset($fail))
+						  if (isset($nameErr))
 				  		{
-					  		echo  "<p class='login-box-msg' style='color:red'>".$fail."</p>";
+					  		echo  "<p class='login-box-msg' style='color:red'>".$nameErr."</p>";
+				  		}
+						  if (isset($emailErr))
+				  		{
+					  		echo  "<p class='login-box-msg' style='color:red'>".$emailErr."</p>";
 				  		}
 					?>
         <form action="verify.php" method="POST">

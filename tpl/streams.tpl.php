@@ -10,10 +10,10 @@
 			<a href="#"><img src="images/logo.png" alt="UWI online"></a>
 			<ul>
 				<li><a href="index.php?controller=Courses">Courses</a></li>
-				<li><a href="index.php?controller=Streams">Streams</a></li>
+				<li><a href="#">Streams</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
 				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=SignUp">Sign Up</a></li>
+				<li><a href="signup.php">Sign Up</a></li>
 			</ul>
 		</nav>
 		<div id="streams-lead-in">
@@ -23,48 +23,76 @@
 		<header id="streams-header"></header>
 		<main class="streams">
 			<div class="centered">
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
+		<?php
+
+						
+						//loop to print first 4 of 8 streams
+						for ($i=0; $i<4;$i++)
+						{
+								
+							//open section 
+							echo "<section class='streams'> ";
+							//print image
+							echo "<a href='#'><img src='images/".$streams[$i]['stream_image']."' alt='Data Science Stream' title='Data Scientist'>
+							";
+							//print course title
+							echo "<span class='course-title padded'>".$streams[$i]['stream_name']."</span>";
+							//print instructors
+							echo "<span class='padded'>";
+							for ($j=0;$j<count($stream_instructors);$j++){
+								//if a match is found in the stream instructors table
+								if($streams[$i]['stream_id'] == $stream_instructors[$j]['stream_id']){
+									//find the stream lecturer for the course
+									for ($k=0;$k<count($instructors);$k++){
+										if ($stream_instructors[$j]['instructor_id'] == $instructors[$k]['instructor_id'] ){
+											echo $instructors[$k]['instructor_name'];//print name of current instructor
+										}
+									}
+								}
+							}
+							
+							echo "</span></a>";
+							//close section
+							echo " </section>";
+					
+						}
+					?>	
 			</div>
 			<div class="centered">
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
-				<section class="streams">
-				<a href="#"><img src="images/BNY_hero2R3_1_.png" alt="Data Science Stream" title="Data Scientist">
-				<span class="course-title padded">Data Scientist Stream</span>
-				<span class="padded">Course Instructor</span></a>
-				</section>
+			<?php
+
+						
+						//loop to print last 4 of 8 streams
+						for ($i=4; $i<8;$i++)
+						{
+								
+							//open section 
+							echo "<section class='streams'> ";
+							//print image
+							echo "<a href='#'><img src='images/".$streams[$i]['stream_image']."' alt='Data Science Stream' title='Data Scientist'>
+							";
+							//print course title
+							echo "<span class='course-title padded'>".$streams[$i]['stream_name']."</span>";
+							//print instructors
+							echo "<span class='padded'>";
+							for ($j=0;$j<count($stream_instructors);$j++){
+								//if a match is found in the stream instructors table
+								if($streams[$i]['stream_id'] == $stream_instructors[$j]['stream_id']){
+									//find the stream lecturer for the course
+									for ($k=0;$k<count($instructors);$k++){
+										if ($stream_instructors[$j]['instructor_id'] == $instructors[$k]['instructor_id'] ){
+											echo $instructors[$k]['instructor_name'];//print name of current instructor
+										}
+									}
+								}
+							}
+							
+							echo "</span></a>";
+							//close section
+							echo " </section>";
+					
+						}
+					?>	
 			</div>
 			<footer>
 				<nav>

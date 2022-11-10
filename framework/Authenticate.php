@@ -3,27 +3,30 @@
 class Authenticate{
     
     public function loginUser(array $data){
+       
         $validator = new ValidateClass();
-        //ensure credentials are validated 
-        if ($validator->areCredentialsValid($data)){
+        
+            
             //check session variable not already set
             if(!isset($_SESSION['session_user'])){
                 //start session 
                 session_start();
 
                 //store data in session array 
-                $user = array("email"=> $data['email'], "first"=>$data['fname'],"last"=>$data['lname'],"login"=>$data['login']);
- 
+                $user = array("email" => $data['email'], "first"=>$data['first'],"last"=>$data['last'],"login"=>$data['login']);
+                
                 //create session array
                 $_SESSION['session_user'] = $user;
+
+        
+                //redirect user to profile page
+                header("Location: profile.php");
+                
+                exit();
             }else{
                 echo "Sorry, only one user can have an active session !";
             }
             
-
-        }else{
-            echo "Sorry...These login credentials are not valid.";
-        }
         
     }
 

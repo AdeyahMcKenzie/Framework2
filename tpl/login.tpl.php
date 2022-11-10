@@ -13,7 +13,7 @@
 				<li><a href="index.php?controller=Streams">Streams</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
 				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=SignUp">Sign Up</a></li>
+				<li><a href="index.php?controller=Register">Sign Up</a></li>
 			</ul>
 		</nav>
 		<main>
@@ -35,7 +35,7 @@
 					  		echo  "<p class='login-box-msg' style='color:green'>".$success."</p>";
 				  		}
 					?>
-			<form action="authenticate.php" method="POST">
+			<form action="loginvalidation.php" method="POST">
 			  <div class="form-group has-feedback">
 				<input type="text" <?php if (isset($email)){ echo "value ='".$email."'";}?>
 					class="form-control" name ="email" placeholder="Email"/>
@@ -57,7 +57,7 @@
 			  </div>
 			</form>
 			<br>
-			<a href="register.html" class="text-center">Sign Up</a>
+			<a href="signup.php" class="text-center">Sign Up</a>
        </div><!-- /.login-box-body -->
 	  </div>
 	  
