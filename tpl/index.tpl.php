@@ -9,8 +9,9 @@
 		<nav>
 			<a href="/"><img src="images/logo.png" alt="Quwius"></a>
 			<ul>
-				<li><a href="courses.php">Courses</a></li>
-				<li><a href="index.php?controller=Streams">Streams</a></li>
+			<li><a href="courses.php">Courses</a></li>
+				<li><a href="stream.php">Streams</a></li>
+				<li><a href="profile.php">Profile</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
 				<li><a href="Login.php">Login</a></li>
 				<li><a href="signup.php">Sign Up</a></li>

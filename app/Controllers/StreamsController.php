@@ -54,6 +54,8 @@ class StreamsController extends AbstractController {
 
         //display everything
         $this->view->display();
+        }else{
+            header("Location:login.php");
         }
 
     }

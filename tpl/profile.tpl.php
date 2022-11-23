@@ -9,25 +9,27 @@
 		<nav>
 			<a href="#"><img src="images/logo.png" alt="UWI online"></a>
 			<ul>
-				<li><a href="index.php?controller=Courses">Courses</a></li>
-				<li><a href="index.php?controller=Streams">Streams</a></li>
+				<li><a href="courses.php">Courses</a></li>
+				<li><a href="stream.php">Streams</a></li>
+				<li><a href="profile.php">Profile</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
-				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=Register">Sign Up</a></li>
+				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>
 		<main>
 		<h1>Profile Page</h1>
 		<h2>Enrolled Courses</h2>
 		<center><p> 
-			<?php if (isset($success)){echo $success;}
+			<!-- PRINT STATUS MESSAGE IF USER HAS SUCCESFULLY UNROLLED OR ENROLLED-->
+			<?php 
+				  if (isset($success)){echo $success;}
 			      if (isset($fail)){echo $fail;}?>
 				</p></center>
 		<ul class="course-list">
 		<?php 
-					$display = [];
+					$display = [];//this will store all course information for courses user is enrolled in
 					
-					//loop array of all courses
+					//Run a loop that will compare the course ids in user courses to the ids in the courses tables to extract all other neessary data on course
 					for($i=0;$i<count($courses);$i++ ){
 						//loop array of courses user enrolled in
 						for($j=0;$j<count($user_courses);$j++){
@@ -40,7 +42,7 @@
 						}
 					}
 					
-					//print_r($data);
+					//loop throught display variable and print each record
 					$k=0;
 					for($k=0;$k<count($display);$k++){
 						//create new list item
@@ -51,7 +53,11 @@
 						<span class='course-title'>".$display[$k]['course_name']."</span>
 						<span class='instructor'>Course Instructor</span>
 						</a> </div>";
-						echo "<div> <a href='#' class='startnow-btn startnow-button'>Go to Class!</a> <form method='post' action='unenroll.php'><a href='unenroll.php' class='startnow-btn unenroll-button'><button style='border:none;background:none;'>Unenroll</button></a><input type='hidden' name='course' value='".$display[$k]['course_id']."'></form></div>";
+						echo "<div> <a href='#' class='startnow-btn startnow-button'>Go to Class!</a> 
+						<form method='post' action='unenroll.php'>
+							<a href='unenroll.php' class='startnow-btn unenroll-button'>
+						<button style='border:none;background:none;'>Unenroll</button></a>
+						<input type='hidden' name='course' value='".$display[$k]['course_id']."'></form></div>";
 						echo "</li>";
 					}
 		?>

@@ -54,7 +54,7 @@ class ProfileController extends AbstractController {
             $this->view->display();
 
         }else {
-            //header("Location:index.php");
+            header("Location:login.php");
         }
 
     }

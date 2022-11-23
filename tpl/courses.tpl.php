@@ -9,17 +9,20 @@
 		<nav>
 			<a href="#"><img src="images/logo.png" alt="UWI online"></a>
 			<ul>
-				<li><a href="index.php?controller=Courses">Courses</a></li>
-				<li><a href="index.php?controller=Streams">Streams</a></li>
+				<li><a href="courses.php">Courses</a></li>
+				<li><a href="stream.php">Streams</a></li>
+				<li><a href="profile.php">Profile</a></li>
 				<li><a href="index.php?controller=AboutUs">About Us</a></li>
-				<li><a href="index.php?controller=Login">Login</a></li>
-				<li><a href="index.php?controller=Register">Sign Up</a></li>
+				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>
 		<main>
 		<h1>Courses</h1>
 			<ul class="course-list">
 				<?php 
+					echo "<center><p>"; 
+					  if (isset($fail)){echo $fail;}
+					echo "</p></center>";
 				
 					//print_r($courses);
 					for($i=0;$i<count($courses);$i++){
@@ -31,8 +34,13 @@
 						<span class='course-title'>".$courses[$i]['course_name']."</span>
 						<span class='instructor'>".$instructors[$i]['instructor_name']."</span>
 						</a> </div>";
-						echo "<div> <center><p> Get Curios </p></center> <a href='#' class='startnow-button startnow-btn'>Start Now!</a></div>";
-						echo "</li>";
+						echo "<div> <center><p> Get Curios </p></center>" ?>
+						<form method='post' action='enroll.php'>
+						<input type='hidden' name='course' value="<?php echo $courses[$i]['course_id'];?>">
+						<a href='enroll.php' class='startnow-button startnow-btn'><button style='border:none;background:none;'>Start Now!</button></a>
+						</form></div>
+						</li>
+				<?php
 					}
 				?>
 			</ul>
